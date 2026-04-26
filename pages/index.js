@@ -97,8 +97,6 @@ export default function Home() {
 
   return (
     <div className="container py-4">
-      <h2 className="mb-4">📄 Document Generator</h2>
-
       {entries.map((entry, i) => (
         <div key={i} className="card mb-4 shadow-sm bg-secondary text-light">
           <div className="card-body">
