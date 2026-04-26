@@ -149,6 +149,8 @@ export default function Home() {
                   <option>Select</option>
                   <option>Transfer Petition (Civil)</option>
                   <option>Transfer Petition (Criminal)</option>
+                  <option>Special Leave Petition (Civil)</option>
+                  <option>Special Leave Petition (Criminal)</option>
                   {/* you can edit later */}
                 </select>
               </div>
@@ -192,8 +194,17 @@ export default function Home() {
                   onChange={(e) => handleChange(i, "section", e.target.value)}
                 >
                   <option>Select</option>
-                  <option>I</option>
-                  <option>IB</option>
+                  <option>II-A</option>
+                  <option>II-B</option>
+                  <option>IV-A</option>
+                  <option>IV-B</option>
+                  <option>IV-C</option>
+                  <option>XVI-A</option>
+                  <option>XVI-B</option>
+                  <option>XVII-A</option>
+                  <option>XVII-B</option>
+                  <option>III-A</option>
+                  <option>III-B</option>
                 </select>
               </div>
 
