@@ -33,6 +33,7 @@ export default function Home() {
       curr_date: new Date().toLocaleDateString("en-GB").replace(/\//g, "."),
       section: "",
       diary: "",
+      diary_reg_year: currentYear,
       diary_day: "",
       diary_month: "01",
       diary_year: currentYear,
@@ -231,6 +232,20 @@ export default function Home() {
               </div>
             </div>
 
+            <div className="col-md-3">
+              <label>Diary Reg Year</label>
+              <select
+                className="form-select bg-dark text-light"
+                value={entry.diary_reg_year}
+                onChange={(e) =>
+                  handleChange(i, "diary_reg_year", e.target.value)
+                }
+              >
+                {years.map((y) => (
+                  <option key={y}>{y}</option>
+                ))}
+              </select>
+            </div>
             {/* Dates */}
             <div className="row g-3 mt-2">
               {["diary", "order", "med"].map((type) => (
