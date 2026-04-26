@@ -359,8 +359,8 @@ export default function Home() {
                   value={entry.copy_type}
                   onChange={(e) => handleChange(i, "copy_type", e.target.value)}
                 >
-                  <option>Original Copy</option>
-                  <option>Scanned Copy</option>
+                  <option>Original</option>
+                  <option>Scanned</option>
                 </select>
               </div>
             </div>
