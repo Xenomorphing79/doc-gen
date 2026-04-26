@@ -230,22 +230,22 @@ export default function Home() {
                   onChange={(e) => handleChange(i, "diary", e.target.value)}
                 />
               </div>
+              <div className="col-md-3">
+                <label>Diary Reg Year</label>
+                <select
+                  className="form-select bg-dark text-light"
+                  value={entry.diary_reg_year}
+                  onChange={(e) =>
+                    handleChange(i, "diary_reg_year", e.target.value)
+                  }
+                >
+                  {years.map((y) => (
+                    <option key={y}>{y}</option>
+                  ))}
+                </select>
+              </div>
             </div>
 
-            <div className="col-md-3">
-              <label>Diary Reg Year</label>
-              <select
-                className="form-select bg-dark text-light"
-                value={entry.diary_reg_year}
-                onChange={(e) =>
-                  handleChange(i, "diary_reg_year", e.target.value)
-                }
-              >
-                {years.map((y) => (
-                  <option key={y}>{y}</option>
-                ))}
-              </select>
-            </div>
             {/* Dates */}
             <div className="row g-3 mt-2">
               {["diary", "order", "med"].map((type) => (
