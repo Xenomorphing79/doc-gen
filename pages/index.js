@@ -1,21 +1,14 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const years = Array.from({ length: 12 }, (_, i) => 2015 + i);
-const diaryYears = Array.from({ length: 7 }, (_, i) => 2020 + i);
+const currentYear = new Date().getFullYear();
+
+const years = Array.from({ length: 12 }, (_, i) => 2015 + i).reverse();
+const diaryYears = Array.from({ length: 7 }, (_, i) => 2020 + i).reverse();
+
 const months = [
-  "01",
-  "02",
-  "03",
-  "04",
-  "05",
-  "06",
-  "07",
-  "08",
-  "09",
-  "10",
-  "11",
-  "12",
+  "01","02","03","04","05","06",
+  "07","08","09","10","11","12"
 ];
 
 export default function Home() {
@@ -24,29 +17,29 @@ export default function Home() {
   function getEmptyEntry() {
     return {
       file_no: "",
-      file_year: "",
+      file_year: currentYear.toString(),
       anr: "",
-      anr_year: "",
+      anr_year: currentYear.toString(),
       curr_date: new Date().toLocaleDateString("en-GB").replace(/\//g, "."),
       section: "",
       diary: "",
       diary_day: "",
       diary_month: "",
-      diary_year: "",
+      diary_year: currentYear.toString(),
       case_type: "",
       case_num: "",
-      case_year: "",
+      case_year: currentYear.toString(),
       party1: "",
       party2: "",
       order_day: "",
       order_month: "",
-      order_year: "",
+      order_year: currentYear.toString(),
       mediator_title: "Mr.",
       mediator_name: "",
       if_settl: "Settlement Agreement",
       med_day: "",
       med_month: "",
-      med_year: "",
+      med_year: currentYear.toString(),
       copy_type: "Original Copy",
     };
   }
@@ -58,6 +51,15 @@ export default function Home() {
   };
 
   const addRow = () => setEntries([...entries, getEmptyEntry()]);
+
+  // ✅ Copy previous row
+  const copyPreviousRow = (i) => {
+    if (i === 0) return;
+
+    const updated = [...entries];
+    updated[i] = { ...entries[i - 1] };
+    setEntries(updated);
+  };
 
   const buildPayload = () =>
     entries.map((e) => ({
@@ -91,49 +93,58 @@ export default function Home() {
       {entries.map((entry, i) => (
         <div key={i} className="card mb-4 shadow-sm">
           <div className="card-body">
-            <h5 className="mb-3">Entry {i + 1}</h5>
+
+            {/* Header with Copy Button */}
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h5 className="mb-0">Entry {i + 1}</h5>
+
+              {i > 0 && (
+                <button
+                  className="btn btn-sm btn-outline-secondary"
+                  onClick={() => copyPreviousRow(i)}
+                >
+                  Copy Previous
+                </button>
+              )}
+            </div>
 
             {/* Row 1 */}
             <div className="row g-3">
               <div className="col-md-3">
-                <label className="form-label">File No</label>
+                <label>File No</label>
                 <input
                   className="form-control"
-                  onChange={(e) => handleChange(i, "file_no", e.target.value)}
+                  onChange={(e) => handleChange(i,"file_no",e.target.value)}
                 />
               </div>
 
               <div className="col-md-3">
-                <label className="form-label">File Year</label>
+                <label>File Year</label>
                 <select
                   className="form-select"
-                  onChange={(e) => handleChange(i, "file_year", e.target.value)}
+                  value={entry.file_year}
+                  onChange={(e) => handleChange(i,"file_year",e.target.value)}
                 >
-                  <option>Select</option>
-                  {years.map((y) => (
-                    <option key={y}>{y}</option>
-                  ))}
+                  {years.map(y => <option key={y}>{y}</option>)}
                 </select>
               </div>
 
               <div className="col-md-3">
-                <label className="form-label">ANR</label>
+                <label>ANR</label>
                 <input
                   className="form-control"
-                  onChange={(e) => handleChange(i, "anr", e.target.value)}
+                  onChange={(e) => handleChange(i,"anr",e.target.value)}
                 />
               </div>
 
               <div className="col-md-3">
-                <label className="form-label">ANR Year</label>
+                <label>ANR Year</label>
                 <select
                   className="form-select"
-                  onChange={(e) => handleChange(i, "anr_year", e.target.value)}
+                  value={entry.anr_year}
+                  onChange={(e) => handleChange(i,"anr_year",e.target.value)}
                 >
-                  <option>Select</option>
-                  {years.map((y) => (
-                    <option key={y}>{y}</option>
-                  ))}
+                  {years.map(y => <option key={y}>{y}</option>)}
                 </select>
               </div>
             </div>
@@ -141,224 +152,69 @@ export default function Home() {
             {/* Case Details */}
             <div className="row g-3 mt-2">
               <div className="col-md-4">
-                <label className="form-label">Case Type</label>
+                <label>Case Type</label>
                 <select
                   className="form-select"
-                  onChange={(e) => handleChange(i, "case_type", e.target.value)}
+                  onChange={(e) => handleChange(i,"case_type",e.target.value)}
                 >
                   <option>Select</option>
                   <option>Transfer Petition (Civil)</option>
                   <option>Transfer Petition (Criminal)</option>
                   <option>Special Leave Petition (Civil)</option>
                   <option>Special Leave Petition (Criminal)</option>
-                  {/* you can edit later */}
                 </select>
               </div>
 
               <div className="col-md-4">
-                <label className="form-label">Case Number</label>
+                <label>Case Number</label>
                 <input
                   className="form-control"
-                  onChange={(e) => handleChange(i, "case_num", e.target.value)}
+                  onChange={(e) => handleChange(i,"case_num",e.target.value)}
                 />
               </div>
 
               <div className="col-md-4">
-                <label className="form-label">Case Year</label>
+                <label>Case Year</label>
                 <select
                   className="form-select"
-                  onChange={(e) => handleChange(i, "case_year", e.target.value)}
+                  value={entry.case_year}
+                  onChange={(e) => handleChange(i,"case_year",e.target.value)}
                 >
-                  <option>Select</option>
-                  {years.map((y) => (
-                    <option key={y}>{y}</option>
-                  ))}
+                  {years.map(y => <option key={y}>{y}</option>)}
                 </select>
               </div>
             </div>
+
             {/* Row 2 */}
             <div className="row g-3 mt-2">
               <div className="col-md-3">
-                <label className="form-label">Current Date</label>
-                <input
-                  className="form-control"
-                  value={entry.curr_date}
-                  readOnly
-                />
+                <label>Current Date</label>
+                <input className="form-control" value={entry.curr_date} readOnly />
               </div>
 
               <div className="col-md-3">
-                <label className="form-label">Section</label>
+                <label>Section</label>
                 <select
                   className="form-select"
-                  onChange={(e) => handleChange(i, "section", e.target.value)}
+                  onChange={(e) => handleChange(i,"section",e.target.value)}
                 >
                   <option>Select</option>
                   <option>II-A</option>
                   <option>II-B</option>
                   <option>IV-A</option>
                   <option>IV-B</option>
-                  <option>IV-C</option>
-                  <option>XVI-A</option>
-                  <option>XVI-B</option>
-                  <option>XVII-A</option>
-                  <option>XVII-B</option>
-                  <option>III-A</option>
-                  <option>III-B</option>
                 </select>
               </div>
 
               <div className="col-md-3">
-                <label className="form-label">Diary</label>
+                <label>Diary</label>
                 <input
                   className="form-control"
-                  onChange={(e) => handleChange(i, "diary", e.target.value)}
+                  onChange={(e) => handleChange(i,"diary",e.target.value)}
                 />
               </div>
             </div>
 
-            {/* Dates */}
-            <div className="row g-3 mt-2">
-              <div className="col-md-4">
-                <label>Diary Date</label>
-                <div className="d-flex gap-2">
-                  <input
-                    placeholder="DD"
-                    className="form-control"
-                    onChange={(e) =>
-                      handleChange(i, "diary_day", e.target.value)
-                    }
-                  />
-                  <select
-                    className="form-select"
-                    onChange={(e) =>
-                      handleChange(i, "diary_month", e.target.value)
-                    }
-                  >
-                    {months.map((m) => (
-                      <option key={m}>{m}</option>
-                    ))}
-                  </select>
-                  <select
-                    className="form-select"
-                    onChange={(e) =>
-                      handleChange(i, "diary_year", e.target.value)
-                    }
-                  >
-                    {diaryYears.map((y) => (
-                      <option key={y}>{y}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div className="col-md-4">
-                <label>Order Date</label>
-                <div className="d-flex gap-2">
-                  <input
-                    placeholder="DD"
-                    className="form-control"
-                    onChange={(e) =>
-                      handleChange(i, "order_day", e.target.value)
-                    }
-                  />
-                  <select
-                    className="form-select"
-                    onChange={(e) =>
-                      handleChange(i, "order_month", e.target.value)
-                    }
-                  >
-                    {months.map((m) => (
-                      <option key={m}>{m}</option>
-                    ))}
-                  </select>
-                  <select
-                    className="form-select"
-                    onChange={(e) =>
-                      handleChange(i, "order_year", e.target.value)
-                    }
-                  >
-                    {diaryYears.map((y) => (
-                      <option key={y}>{y}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div className="col-md-4">
-                <label>Mediation Date</label>
-                <div className="d-flex gap-2">
-                  <input
-                    placeholder="DD"
-                    className="form-control"
-                    onChange={(e) => handleChange(i, "med_day", e.target.value)}
-                  />
-                  <select
-                    className="form-select"
-                    onChange={(e) =>
-                      handleChange(i, "med_month", e.target.value)
-                    }
-                  >
-                    {months.map((m) => (
-                      <option key={m}>{m}</option>
-                    ))}
-                  </select>
-                  <select
-                    className="form-select"
-                    onChange={(e) =>
-                      handleChange(i, "med_year", e.target.value)
-                    }
-                  >
-                    {diaryYears.map((y) => (
-                      <option key={y}>{y}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {/* Parties */}
-            <div className="row g-3 mt-2">
-              <div className="col-md-6">
-                <label>Party 1</label>
-                <input
-                  className="form-control"
-                  onChange={(e) => handleChange(i, "party1", e.target.value)}
-                />
-              </div>
-              <div className="col-md-6">
-                <label>Party 2</label>
-                <input
-                  className="form-control"
-                  onChange={(e) => handleChange(i, "party2", e.target.value)}
-                />
-              </div>
-            </div>
-
-            {/* Mediator */}
-            <div className="row g-3 mt-2">
-              <div className="col-md-3">
-                <label>Title</label>
-                <select
-                  className="form-select"
-                  onChange={(e) =>
-                    handleChange(i, "mediator_title", e.target.value)
-                  }
-                >
-                  <option>Mr.</option>
-                  <option>Ms.</option>
-                </select>
-              </div>
-              <div className="col-md-9">
-                <label>Mediator Name</label>
-                <input
-                  className="form-control"
-                  onChange={(e) =>
-                    handleChange(i, "mediator_name", e.target.value)
-                  }
-                />
-              </div>
-            </div>
           </div>
         </div>
       ))}
