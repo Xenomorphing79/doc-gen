@@ -46,7 +46,7 @@ export default function Home() {
       order_year: currentYear,
       mediator_title: "Mr.",
       mediator_name: "",
-      if_settl: "Settlement Agreement",
+      if_settl: "Mediation Report",
       med_day: "",
       med_month: "01",
       med_year: currentYear,
@@ -270,6 +270,7 @@ export default function Home() {
                         handleChange(i, `${type}_year`, e.target.value)
                       }
                     >
+                      <option value="">Select</option>
                       {diaryYears.map((y) => (
                         <option key={y}>{y}</option>
                       ))}
@@ -320,6 +321,32 @@ export default function Home() {
                     handleChange(i, "mediator_name", e.target.value)
                   }
                 />
+              </div>
+            </div>
+            {/* Settlement + Copy Type */}
+            <div className="row g-3 mt-2">
+              <div className="col-md-6">
+                <label>Document Type</label>
+                <select
+                  className="form-select bg-dark text-light"
+                  value={entry.if_settl}
+                  onChange={(e) => handleChange(i, "if_settl", e.target.value)}
+                >
+                  <option>Settlement Agreement</option>
+                  <option>Mediation Report</option>
+                </select>
+              </div>
+
+              <div className="col-md-6">
+                <label>Copy Type</label>
+                <select
+                  className="form-select bg-dark text-light"
+                  value={entry.copy_type}
+                  onChange={(e) => handleChange(i, "copy_type", e.target.value)}
+                >
+                  <option>Original Copy</option>
+                  <option>Scanned Copy</option>
+                </select>
               </div>
             </div>
           </div>
