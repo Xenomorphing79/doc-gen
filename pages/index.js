@@ -1,15 +1,24 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 const currentYear = new Date().getFullYear().toString();
 
 const years = Array.from({ length: 12 }, (_, i) => 2015 + i).reverse();
 const diaryYears = Array.from({ length: 7 }, (_, i) => 2020 + i).reverse();
 
 const months = [
-  "01","02","03","04","05","06",
-  "07","08","09","10","11","12"
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11",
+  "12",
 ];
 
 export default function Home() {
@@ -92,7 +101,6 @@ export default function Home() {
       {entries.map((entry, i) => (
         <div key={i} className="card mb-4 shadow-sm bg-secondary text-light">
           <div className="card-body">
-
             {/* Header */}
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="mb-0">Entry {i + 1}</h5>
@@ -110,31 +118,43 @@ export default function Home() {
             <div className="row g-3">
               <div className="col-md-3">
                 <label>File No</label>
-                <input className="form-control bg-dark text-light"
-                  onChange={(e)=>handleChange(i,"file_no",e.target.value)} />
+                <input
+                  className="form-control bg-dark text-light"
+                  onChange={(e) => handleChange(i, "file_no", e.target.value)}
+                />
               </div>
 
               <div className="col-md-3">
                 <label>File Year</label>
-                <select className="form-select bg-dark text-light"
+                <select
+                  className="form-select bg-dark text-light"
                   value={entry.file_year}
-                  onChange={(e)=>handleChange(i,"file_year",e.target.value)}>
-                  {years.map(y=><option key={y}>{y}</option>)}
+                  onChange={(e) => handleChange(i, "file_year", e.target.value)}
+                >
+                  {years.map((y) => (
+                    <option key={y}>{y}</option>
+                  ))}
                 </select>
               </div>
 
               <div className="col-md-3">
                 <label>ANR</label>
-                <input className="form-control bg-dark text-light"
-                  onChange={(e)=>handleChange(i,"anr",e.target.value)} />
+                <input
+                  className="form-control bg-dark text-light"
+                  onChange={(e) => handleChange(i, "anr", e.target.value)}
+                />
               </div>
 
               <div className="col-md-3">
                 <label>ANR Year</label>
-                <select className="form-select bg-dark text-light"
+                <select
+                  className="form-select bg-dark text-light"
                   value={entry.anr_year}
-                  onChange={(e)=>handleChange(i,"anr_year",e.target.value)}>
-                  {years.map(y=><option key={y}>{y}</option>)}
+                  onChange={(e) => handleChange(i, "anr_year", e.target.value)}
+                >
+                  {years.map((y) => (
+                    <option key={y}>{y}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -143,8 +163,10 @@ export default function Home() {
             <div className="row g-3 mt-2">
               <div className="col-md-4">
                 <label>Case Type</label>
-                <select className="form-select bg-dark text-light"
-                  onChange={(e)=>handleChange(i,"case_type",e.target.value)}>
+                <select
+                  className="form-select bg-dark text-light"
+                  onChange={(e) => handleChange(i, "case_type", e.target.value)}
+                >
                   <option>Select</option>
                   <option>Transfer Petition (Civil)</option>
                   <option>Transfer Petition (Criminal)</option>
@@ -155,16 +177,22 @@ export default function Home() {
 
               <div className="col-md-4">
                 <label>Case Number</label>
-                <input className="form-control bg-dark text-light"
-                  onChange={(e)=>handleChange(i,"case_num",e.target.value)} />
+                <input
+                  className="form-control bg-dark text-light"
+                  onChange={(e) => handleChange(i, "case_num", e.target.value)}
+                />
               </div>
 
               <div className="col-md-4">
                 <label>Case Year</label>
-                <select className="form-select bg-dark text-light"
+                <select
+                  className="form-select bg-dark text-light"
                   value={entry.case_year}
-                  onChange={(e)=>handleChange(i,"case_year",e.target.value)}>
-                  {years.map(y=><option key={y}>{y}</option>)}
+                  onChange={(e) => handleChange(i, "case_year", e.target.value)}
+                >
+                  {years.map((y) => (
+                    <option key={y}>{y}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -173,65 +201,99 @@ export default function Home() {
             <div className="row g-3 mt-2">
               <div className="col-md-3">
                 <label>Current Date</label>
-                <input className="form-control bg-dark text-light"
-                  value={entry.curr_date} readOnly />
+                <input
+                  className="form-control bg-dark text-light"
+                  value={entry.curr_date}
+                  readOnly
+                />
               </div>
 
               <div className="col-md-3">
                 <label>Section</label>
-                <select className="form-select bg-dark text-light"
-                  onChange={(e)=>handleChange(i,"section",e.target.value)}>
+                <select
+                  className="form-select bg-dark text-light"
+                  onChange={(e) => handleChange(i, "section", e.target.value)}
+                >
                   <option>Select</option>
-                  <option>II-A</option><option>II-B</option>
-                  <option>IV-A</option><option>IV-B</option>
+                  <option>II-A</option>
+                  <option>II-B</option>
+                  <option>IV-A</option>
+                  <option>IV-B</option>
                 </select>
               </div>
 
               <div className="col-md-3">
                 <label>Diary</label>
-                <input className="form-control bg-dark text-light"
-                  onChange={(e)=>handleChange(i,"diary",e.target.value)} />
+                <input
+                  className="form-control bg-dark text-light"
+                  onChange={(e) => handleChange(i, "diary", e.target.value)}
+                />
               </div>
             </div>
 
             {/* Dates */}
             <div className="row g-3 mt-2">
-
-              {["diary","order","med"].map((type)=>(
+              {["diary", "order", "med"].map((type) => (
                 <div className="col-md-4" key={type}>
-                  <label>{type === "diary" ? "Diary Date" : type === "order" ? "Order Date" : "Mediation Date"}</label>
+                  <label>
+                    {type === "diary"
+                      ? "Diary Date"
+                      : type === "order"
+                        ? "Order Date"
+                        : "Mediation Date"}
+                  </label>
                   <div className="d-flex gap-2">
-                    <input placeholder="DD" className="form-control bg-dark text-light"
-                      onChange={(e)=>handleChange(i,`${type}_day`,e.target.value)} />
+                    <input
+                      placeholder="DD"
+                      className="form-control bg-dark text-light"
+                      onChange={(e) =>
+                        handleChange(i, `${type}_day`, e.target.value)
+                      }
+                    />
 
-                    <select className="form-select bg-dark text-light"
+                    <select
+                      className="form-select bg-dark text-light"
                       value={entry[`${type}_month`]}
-                      onChange={(e)=>handleChange(i,`${type}_month`,e.target.value)}>
-                      {months.map(m=><option key={m}>{m}</option>)}
+                      onChange={(e) =>
+                        handleChange(i, `${type}_month`, e.target.value)
+                      }
+                    >
+                      {months.map((m) => (
+                        <option key={m}>{m}</option>
+                      ))}
                     </select>
 
-                    <select className="form-select bg-dark text-light"
+                    <select
+                      className="form-select bg-dark text-light"
                       value={entry[`${type}_year`]}
-                      onChange={(e)=>handleChange(i,`${type}_year`,e.target.value)}>
-                      {diaryYears.map(y=><option key={y}>{y}</option>)}
+                      onChange={(e) =>
+                        handleChange(i, `${type}_year`, e.target.value)
+                      }
+                    >
+                      {diaryYears.map((y) => (
+                        <option key={y}>{y}</option>
+                      ))}
                     </select>
                   </div>
                 </div>
               ))}
-
             </div>
 
             {/* Parties */}
             <div className="row g-3 mt-2">
               <div className="col-md-6">
                 <label>Party 1</label>
-                <input className="form-control bg-dark text-light"
-                  onChange={(e)=>handleChange(i,"party1",e.target.value)} />
+                <input
+                  className="form-control bg-dark text-light"
+                  onChange={(e) => handleChange(i, "party1", e.target.value)}
+                />
               </div>
               <div className="col-md-6">
                 <label>Party 2</label>
-                <input className="form-control bg-dark text-light"
-                  onChange={(e)=>handleChange(i,"party2",e.target.value)} />
+                <input
+                  className="form-control bg-dark text-light"
+                  onChange={(e) => handleChange(i, "party2", e.target.value)}
+                />
               </div>
             </div>
 
@@ -239,20 +301,27 @@ export default function Home() {
             <div className="row g-3 mt-2">
               <div className="col-md-3">
                 <label>Title</label>
-                <select className="form-select bg-dark text-light"
+                <select
+                  className="form-select bg-dark text-light"
                   value={entry.mediator_title}
-                  onChange={(e)=>handleChange(i,"mediator_title",e.target.value)}>
+                  onChange={(e) =>
+                    handleChange(i, "mediator_title", e.target.value)
+                  }
+                >
                   <option>Mr.</option>
                   <option>Ms.</option>
                 </select>
               </div>
               <div className="col-md-9">
                 <label>Mediator Name</label>
-                <input className="form-control bg-dark text-light"
-                  onChange={(e)=>handleChange(i,"mediator_name",e.target.value)} />
+                <input
+                  className="form-control bg-dark text-light"
+                  onChange={(e) =>
+                    handleChange(i, "mediator_name", e.target.value)
+                  }
+                />
               </div>
             </div>
-
           </div>
         </div>
       ))}
