@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
       const buffer = doc.getZip().generate({ type: "nodebuffer" });
 
-      const safeName = `${data.anr}_${data.anr_year}_${i + 1}`;
+      const safeName = `${data.anr}-${data.anr_year}`;
 
       const fileName =
         index === 0

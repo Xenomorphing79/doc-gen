@@ -158,7 +158,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Case */}
+            {/* Row 2 */}
             <div className="row g-3 mt-2">
               <div className="col-md-4">
                 <label>Case Type</label>
@@ -171,6 +171,8 @@ export default function Home() {
                   <option>Transfer Petition (Criminal)</option>
                   <option>Special Leave Petition (Civil)</option>
                   <option>Special Leave Petition (Criminal)</option>
+                  <option>Civil Appeal</option>
+                  <option>Criminal Appeal</option>
                 </select>
               </div>
 
@@ -196,124 +198,44 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Row 2 */}
+            {/* Row 3 */}
             <div className="row g-3 mt-2">
-              <div className="col-md-3">
-                <label>Current Date</label>
-                <input
-                  className="form-control bg-dark text-light"
-                  value={entry.curr_date}
-                  readOnly
-                />
-              </div>
-
-              <div className="col-md-3">
-                <label>Section</label>
-                <select
-                  className="form-select bg-dark text-light"
-                  onChange={(e) => handleChange(i, "section", e.target.value)}
-                >
-                  <option>Select</option>
-                  <option>II-A</option>
-                  <option>II-B</option>
-                  <option>IV-A</option>
-                  <option>IV-B</option>
-                </select>
-              </div>
-
-              <div className="col-md-3">
-                <label>Diary</label>
-                <input
-                  className="form-control bg-dark text-light"
-                  onChange={(e) => handleChange(i, "diary", e.target.value)}
-                />
-              </div>
-              <div className="col-md-3">
-                <label>Diary Reg Year</label>
-                <select
-                  className="form-select bg-dark text-light"
-                  value={entry.diary_reg_year}
-                  onChange={(e) =>
-                    handleChange(i, "diary_reg_year", e.target.value)
-                  }
-                >
-                  {years.map((y) => (
-                    <option key={y}>{y}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            {/* Dates */}
-            <div className="row g-3 mt-2">
-              {["diary", "order", "med"].map((type) => (
-                <div className="col-md-4" key={type}>
-                  <label>
-                    {type === "diary"
-                      ? "Diary Date"
-                      : type === "order"
-                        ? "Order Date"
-                        : "Mediation Date"}
-                  </label>
-                  <div className="d-flex gap-2">
-                    <input
-                      placeholder="DD"
-                      className="form-control bg-dark text-light"
-                      onChange={(e) =>
-                        handleChange(i, `${type}_day`, e.target.value)
-                      }
-                    />
-
-                    <select
-                      className="form-select bg-dark text-light"
-                      value={entry[`${type}_month`]}
-                      onChange={(e) =>
-                        handleChange(i, `${type}_month`, e.target.value)
-                      }
-                    >
-                      {months.map((m) => (
-                        <option key={m}>{m}</option>
-                      ))}
-                    </select>
-
-                    <select
-                      className="form-select bg-dark text-light"
-                      value={entry[`${type}_year`]}
-                      onChange={(e) =>
-                        handleChange(i, `${type}_year`, e.target.value)
-                      }
-                    >
-                      <option value="">Select</option>
-                      {diaryYears.map((y) => (
-                        <option key={y}>{y}</option>
-                      ))}
-                    </select>
-                  </div>
+              {/* Mediation Date */}
+              <div className="col-md-4">
+                <label>Mediation Date</label>
+                <div className="d-flex gap-2">
+                  <input
+                    placeholder="DD"
+                    className="form-control bg-dark text-light"
+                    onChange={(e) => handleChange(i, "med_day", e.target.value)}
+                  />
+                  <select
+                    className="form-select bg-dark text-light"
+                    value={entry.med_month}
+                    onChange={(e) =>
+                      handleChange(i, "med_month", e.target.value)
+                    }
+                  >
+                    {months.map((m) => (
+                      <option key={m}>{m}</option>
+                    ))}
+                  </select>
+                  <select
+                    className="form-select bg-dark text-light"
+                    value={entry.med_year}
+                    onChange={(e) =>
+                      handleChange(i, "med_year", e.target.value)
+                    }
+                  >
+                    {diaryYears.map((y) => (
+                      <option key={y}>{y}</option>
+                    ))}
+                  </select>
                 </div>
-              ))}
-            </div>
-
-            {/* Parties */}
-            <div className="row g-3 mt-2">
-              <div className="col-md-6">
-                <label>Party 1</label>
-                <input
-                  className="form-control bg-dark text-light"
-                  onChange={(e) => handleChange(i, "party1", e.target.value)}
-                />
               </div>
-              <div className="col-md-6">
-                <label>Party 2</label>
-                <input
-                  className="form-control bg-dark text-light"
-                  onChange={(e) => handleChange(i, "party2", e.target.value)}
-                />
-              </div>
-            </div>
 
-            {/* Mediator */}
-            <div className="row g-3 mt-2">
-              <div className="col-md-3">
+              {/* Title */}
+              <div className="col-md-2">
                 <label>Title</label>
                 <select
                   className="form-select bg-dark text-light"
@@ -324,9 +246,12 @@ export default function Home() {
                 >
                   <option>Mr.</option>
                   <option>Ms.</option>
+                  <option>Dr.</option>
                 </select>
               </div>
-              <div className="col-md-9">
+
+              {/* Mediator */}
+              <div className="col-md-6">
                 <label>Mediator Name</label>
                 <input
                   className="form-control bg-dark text-light"
@@ -336,7 +261,8 @@ export default function Home() {
                 />
               </div>
             </div>
-            {/* Settlement + Copy Type */}
+
+            {/* Row 4 */}
             <div className="row g-3 mt-2">
               <div className="col-md-6">
                 <label>Document Type</label>
@@ -360,6 +286,204 @@ export default function Home() {
                   <option>Original</option>
                   <option>Scanned</option>
                 </select>
+              </div>
+            </div>
+
+            {/* Row 5 */}
+            <div className="row g-3 mt-2">
+              <div className="col-md-6">
+                <label>Party 1</label>
+                <input
+                  className="form-control bg-dark text-light"
+                  onChange={(e) => handleChange(i, "party1", e.target.value)}
+                />
+              </div>
+
+              <div className="col-md-6">
+                <label>Party 2</label>
+                <input
+                  className="form-control bg-dark text-light"
+                  onChange={(e) => handleChange(i, "party2", e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Row 6 */}
+            <div className="row g-3 mt-2">
+              <div className="col-md-2">
+                <label>Current Date</label>
+                <input
+                  className="form-control bg-dark text-light"
+                  value={entry.curr_date}
+                  readOnly
+                />
+              </div>
+
+              <div className="col-md-2">
+                <label>Diary</label>
+                <input
+                  className="form-control bg-dark text-light"
+                  onChange={(e) => handleChange(i, "diary", e.target.value)}
+                />
+              </div>
+
+              {/* Diary Date */}
+              <div className="col-md-3">
+                <label>Diary Date</label>
+                <div className="d-flex gap-2">
+                  <input
+                    placeholder="DD"
+                    className="form-control bg-dark text-light"
+                    onChange={(e) =>
+                      handleChange(i, "diary_day", e.target.value)
+                    }
+                  />
+                  <select
+                    className="form-select bg-dark text-light"
+                    value={entry.diary_month}
+                    onChange={(e) =>
+                      handleChange(i, "diary_month", e.target.value)
+                    }
+                  >
+                    {months.map((m) => (
+                      <option key={m}>{m}</option>
+                    ))}
+                  </select>
+                  <select
+                    className="form-select bg-dark text-light"
+                    value={entry.diary_year}
+                    onChange={(e) =>
+                      handleChange(i, "diary_year", e.target.value)
+                    }
+                  >
+                    {diaryYears.map((y) => (
+                      <option key={y}>{y}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="col-md-2">
+                <label>Section</label>
+                <select
+                  className="form-select bg-dark text-light"
+                  onChange={(e) => handleChange(i, "section", e.target.value)}
+                >
+                  <option>Select</option>
+                  <option>II</option>
+                  <option>II-A</option>
+                  <option>II-B</option>
+                  <option>II-C</option>
+                  <option>II-D</option>
+                  <option>III</option>
+                  <option>III-A</option>
+                  <option>III-B</option>
+                  <option>III-C</option>
+                  <option>III-D</option>
+                  <option>IV</option>
+                  <option>IV-A</option>
+                  <option>IV-B</option>
+                  <option>IV-C</option>
+                  <option>IV-D</option>
+                  <option>V</option>
+                  <option>V-A</option>
+                  <option>V-B</option>
+                  <option>V-C</option>
+                  <option>V-D</option>
+                  <option>VI</option>
+                  <option>VI-A</option>
+                  <option>VI-B</option>
+                  <option>VI-C</option>
+                  <option>VI-D</option>
+                  <option>VII</option>
+                  <option>VII-A</option>
+                  <option>VII-B</option>
+                  <option>VII-C</option>
+                  <option>VII-D</option>
+                  <option>VIII</option>
+                  <option>VIII-A</option>
+                  <option>VIII-B</option>
+                  <option>VIII-C</option>
+                  <option>VIII-D</option>
+                  <option>IX</option>
+                  <option>IX-A</option>
+                  <option>IX-B</option>
+                  <option>IX-C</option>
+                  <option>IX-D</option>
+                  <option>X</option>
+                  <option>X-A</option>
+                  <option>X-B</option>
+                  <option>X-C</option>
+                  <option>X-D</option>
+                  <option>XI</option>
+                  <option>XI-A</option>
+                  <option>XI-B</option>
+                  <option>XI-C</option>
+                  <option>XI-D</option>
+                  <option>XII</option>
+                  <option>XII-A</option>
+                  <option>XII-B</option>
+                  <option>XIII</option>
+                  <option>XIII-A</option>
+                  <option>XIII-B</option>
+                  <option>XIV</option>
+                  <option>XIV-A</option>
+                  <option>XIV-B</option>
+                  <option>XV</option>
+                  <option>XV-A</option>
+                  <option>XV-B</option>
+                  <option>XVI</option>
+                  <option>XVI-A</option>
+                  <option>XVI-B</option>
+                  <option>XVII</option>
+                  <option>XVII-A</option>
+                  <option>XVII-B</option>
+                  <option>XVIII</option>
+                  <option>XVIII-A</option>
+                  <option>XVIII-B</option>
+                  <option>XIX</option>
+                  <option>XIX-A</option>
+                  <option>XIX-B</option>
+                  <option>XX</option>
+                  <option>XX-A</option>
+                  <option>XX-B</option>
+                </select>
+              </div>
+
+              {/* Order Date */}
+              <div className="col-md-3">
+                <label>Order Date</label>
+                <div className="d-flex gap-2">
+                  <input
+                    placeholder="DD"
+                    className="form-control bg-dark text-light"
+                    onChange={(e) =>
+                      handleChange(i, "order_day", e.target.value)
+                    }
+                  />
+                  <select
+                    className="form-select bg-dark text-light"
+                    value={entry.order_month}
+                    onChange={(e) =>
+                      handleChange(i, "order_month", e.target.value)
+                    }
+                  >
+                    {months.map((m) => (
+                      <option key={m}>{m}</option>
+                    ))}
+                  </select>
+                  <select
+                    className="form-select bg-dark text-light"
+                    value={entry.order_year}
+                    onChange={(e) =>
+                      handleChange(i, "order_year", e.target.value)
+                    }
+                  >
+                    {diaryYears.map((y) => (
+                      <option key={y}>{y}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
           </div>
