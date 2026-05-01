@@ -208,6 +208,7 @@ export default function Home() {
                     <option>Mr.</option>
                     <option>Ms.</option>
                     <option>Dr.</option>
+                    <option>Mrs.</option>
                   </select>
                   <input
                     className="form-control bg-dark text-light"
@@ -435,8 +436,28 @@ export default function Home() {
                 </select>
               </div>
             </div>
+            {/* Row 5 — Party Names (Clean Full Row) */}
+            <div className="row g-3 mt-3">
+              <div className="col-md-6">
+                <label className="form-label fw-semibold">Party 1</label>
+                <input
+                  className="form-control bg-dark text-light"
+                  placeholder="Enter Party 1 name"
+                  onChange={(e) => handleChange(i, "party1", e.target.value)}
+                />
+              </div>
 
-            {/* ROW 5 */}
+              <div className="col-md-6">
+                <label className="form-label fw-semibold">Party 2</label>
+                <input
+                  className="form-control bg-dark text-light"
+                  placeholder="Enter Party 2 name"
+                  onChange={(e) => handleChange(i, "party2", e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* ROW 6 */}
             <div className="row g-3 mt-2">
               <div className="col-md-6">
                 <label>Order Date</label>
