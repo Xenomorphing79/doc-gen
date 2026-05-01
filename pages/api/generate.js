@@ -4,18 +4,17 @@ import PizZip from "pizzip";
 import Docxtemplater from "docxtemplater";
 import JSZip from "jszip";
 
-
 export default async function handler(req, res) {
   const { entries } = req.body;
 
   const template1 = fs.readFileSync(
     path.join(process.cwd(), "public/document.docx"),
-    "binary"
+    "binary",
   );
 
   const template2 = fs.readFileSync(
     path.join(process.cwd(), "public/note.docx"),
-    "binary"
+    "binary",
   );
 
   const zip = new JSZip();
@@ -33,12 +32,12 @@ export default async function handler(req, res) {
 
       const buffer = doc.getZip().generate({ type: "nodebuffer" });
 
-      const safeName = `${data.anr}-${data.anr_year}`;
+      const fileNumber = i + 1;
 
       const fileName =
         index === 0
-          ? `Cover Letter ${safeName}.docx`
-          : `Note ${safeName}.docx`;
+          ? `Cover Letter ${fileNumber}.docx`
+          : `Note ${fileNumber}.docx`;
 
       zip.file(fileName, buffer);
     });
